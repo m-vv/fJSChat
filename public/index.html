@@ -5,6 +5,10 @@
 </head>
 
 <body>
+  <div id="messageList"></div>
+
+
+
   <input type-"text" placeholder="message content" id="messageText" />
   <button onclick="sendMessage()">send</button>
   <script src="//unpkg.com/feathers-client@^1.0.0/dist/feathers.js"></script>
@@ -22,6 +26,9 @@
 
     // Listen for when a new message has been created
     messages.on('created', function (message) {
+      var messageList = document.getElementById("messageList");
+      messageList.innerHTML += "<h4>" + message.text + "</h4>";
+
       console.log('Someone created a message', message);
     });
 
