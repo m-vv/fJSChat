@@ -36,7 +36,7 @@
 
       console.log('Someone created a message', message);
     });
- mess.on('created', function (message) {
+ mess.on('created', function (mess) {
       var messageList1 = document.getElementById("messageList1");
       messageList1.innerHTML += "<h4>" + mess.text + "</h4>";
 
