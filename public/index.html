@@ -11,6 +11,10 @@
 
   <input type-"text" placeholder="message content" id="messageText" />
   <button onclick="sendMessage()">send</button>
+  <br />
+    <div id="messageList1"></div>
+  <input type-"text" placeholder="message content for mes" id="messageText1" />
+  <button onclick="sendMessage1()">send</button>
   <script src="//unpkg.com/feathers-client@^1.0.0/dist/feathers.js"></script>
   <script src="socket.io/socket.io.js"></script>
   <script type="text/javascript">
@@ -23,6 +27,7 @@
     // Retrieve a connection to the /messages service on the server
     // This service will use websockets for all communication
     var messages = app.service('messages');
+    var mess = app.service('mes');
 
     // Listen for when a new message has been created
     messages.on('created', function (message) {
@@ -31,16 +36,28 @@
 
       console.log('Someone created a message', message);
     });
+ mess.on('created', function (message) {
+      var messageList1 = document.getElementById("messageList1");
+      messageList1.innerHTML += "<h4>" + mess.text + "</h4>";
 
+      console.log('Someone created a message', message);
+    });
     // Create a new message on the service
     messages.create({
       text: 'Hello from websocket!'
     });
+    mess.create({
+      text: 'Hello from websocket! for mes'
+    });
+   
     function sendMessage() {
       var messageValue = document.getElementById("messageText").value;
       messages.create({text: messageValue});
     }
-
+function sendMessage1() {
+      var messageValue = document.getElementById("messageText1").value;
+      mess.create({text: messageValue});
+    }
   </script>
 
 </body>
